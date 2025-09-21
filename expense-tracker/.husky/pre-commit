@@ -1,1 +1,2 @@
+cd expense-tracker
 npx lint-staged
