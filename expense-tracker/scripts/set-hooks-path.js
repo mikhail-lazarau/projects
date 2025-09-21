@@ -16,7 +16,7 @@ try {
   const hooks = path.join(root, 'expense-tracker', '.husky');
 
   // Ensure Husky is installed into that folder (no .git needed here)
-  execSync(`npx husky install "${hooks}"`, { stdio: 'inherit' });
+  execSync(`npx husky "${hooks}"`, { stdio: 'inherit' });
 
   // Point Git to that hooks path
   execSync(`git config core.hooksPath "${hooks}"`, { stdio: 'inherit' });
