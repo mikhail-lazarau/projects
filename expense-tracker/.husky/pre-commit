@@ -1,2 +1,2 @@
-cd expense-tracker
+cd "$(git rev-parse --show-toplevel)/expense-tracker"
 npx lint-staged

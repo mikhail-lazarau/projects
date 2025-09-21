@@ -1,6 +1,7 @@
 {
   "name": "expense-tracker-backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "Backend for the expense tracker application",
   "main": "build/index.js",
   "scripts": {
@@ -12,7 +13,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "node scripts/set-hooks-path.js"
   },
   "keywords": [],
   "author": "",
