@@ -4,12 +4,7 @@ import config from './config';
 const app = express();
 
 app.get('/api/ping', (req: Request, res: Response) => {
-
-  
-
   res.json({ message: 'pong' });
-
-
   
 });
 
