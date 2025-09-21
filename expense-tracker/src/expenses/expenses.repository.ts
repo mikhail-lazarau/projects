@@ -1,6 +1,6 @@
-import db from '../db/db.service';
-import { Expense } from './entity/expense.entity';
-import { CreateExpenseDto } from './dto/create-expense.dto';
+import db from '../db/db.service.js';
+import { Expense } from './entity/expense.entity.js';
+import { CreateExpenseDto } from './dto/create-expense.dto.js';
 
 export class ExpensesRepository {
   public create(dto: CreateExpenseDto): Expense {

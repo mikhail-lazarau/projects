@@ -1,5 +1,5 @@
-import { ExpensesRepository } from './expenses.repository';
-import { CreateExpenseDto } from './dto/create-expense.dto';
+import { ExpensesRepository } from './expenses.repository.js';
+import { CreateExpenseDto } from './dto/create-expense.dto.js';
 
 export class ExpensesService {
   constructor(private readonly expensesRepository: ExpensesRepository) {}

@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
 import config from './config/index.js';
-import { ExpensesController } from './expenses/expenses.controller';
-import { ExpensesService } from './expenses/expenses.service';
-import { ExpensesRepository } from './expenses/expenses.repository';
+import { ExpensesController } from './expenses/expenses.controller.js';
+import { ExpensesService } from './expenses/expenses.service.js';
+import { ExpensesRepository } from './expenses/expenses.repository.js';
 
 const app = express();
 

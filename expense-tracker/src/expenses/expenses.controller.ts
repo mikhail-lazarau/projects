@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
-import { ExpensesService } from './expenses.service';
-import { CreateExpenseDto } from './dto/create-expense.dto';
+import { ExpensesService } from './expenses.service.js';
+import { CreateExpenseDto } from './dto/create-expense.dto.js';
 
 export class ExpensesController {
   public router = Router();

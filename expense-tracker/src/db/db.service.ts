@@ -1,7 +1,7 @@
 import Database from 'better-sqlite3';
-import config from '../config';
+import config from '../config/index.js';
 
-const db = new Database(config.databaseUrl.replace('file:', ''), {
+const db = new Database(config.databaseUrl, {
   fileMustExist: false,
 });
 
