@@ -9,18 +9,26 @@ export class ExpensesController {
     this.initializeRoutes();
   }
 
-  private initializeRoutes() {
+  private initializeRoutes = () => {
     this.router.post('/', this.create);
     this.router.get('/', this.findAll);
-  }
+    this.router.get('/:id', this.find);
+  };
 
-  private create = (req: Request, res: Response) => {
-    const expense = this.expensesService.create(req.body as CreateExpenseDto);
+  private create = async (req: Request, res: Response) => {
+    const expense = await this.expensesService.create(
+      req.body as CreateExpenseDto,
+    );
     res.status(201).json(expense);
   };
 
-  private findAll = (req: Request, res: Response) => {
-    const expenses = this.expensesService.findAll();
+  private findAll = async (req: Request, res: Response) => {
+    const expenses = await this.expensesService.findAll();
     res.status(200).json(expenses);
+  };
+
+  private find = async (req: Request, res: Response) => {
+    const expense = await this.expensesService.find(Number(req.params.id));
+    res.status(200).json(expense);
   };
 }
