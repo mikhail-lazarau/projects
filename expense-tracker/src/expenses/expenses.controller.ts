@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { ExpensesService } from './expenses.service.js';
-import { CreateExpenseDto } from './dto/create-expense.dto.js';
+import { CreateExpenseDto, createExpenseSchema } from './dto/create-expense.dto.js';
+import { validationMiddleware } from '../helpers/middlewares/validator.js';
 
 export class ExpensesController {
   public router = Router();
@@ -10,7 +11,7 @@ export class ExpensesController {
   }
 
   private initializeRoutes = () => {
-    this.router.post('/', this.create);
+    this.router.post('/', validationMiddleware(createExpenseSchema), this.create);
     this.router.get('/', this.findAll);
     this.router.get('/:id', this.find);
   };
