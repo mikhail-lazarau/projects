@@ -1,4 +1,14 @@
+import express, { Request, Response } from 'express';
+import config from './config';
+
+const app = express();
+
+app.get('/api/ping', (req: Request, res: Response) => {
+  res.json({ message: 'pong' });
+});
+
 export const start = () => {
-  const port = 8080; // This will be configurable later
-  console.log(`Server listening on port ${port}`);
+  app.listen(config.port, () => {
+    console.log(`Server listening on port ${config.port}`);
+  });
 };
