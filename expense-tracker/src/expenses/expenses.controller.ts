@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import { ExpensesService } from './expenses.service.js';
 import {
   CreateExpenseDto,
@@ -42,8 +42,12 @@ export class ExpensesController {
     res.status(200).json(expenses);
   };
 
-  private find = async (req: Request, res: Response) => {
-    const expense = await this.expensesService.find(Number(req.params.id));
-    res.status(200).json(expense);
+  private find = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const expense = await this.expensesService.find(Number(req.params.id));
+      res.status(200).json(expense);
+    } catch (error) {
+      next(error);
+    }
   };
 }

@@ -11,8 +11,17 @@ import { ExpensesController } from '../src/expenses/expenses.controller.js';
 import { ExpensesService } from '../src/expenses/expenses.service.js';
 import { ExpensesRepository } from '../src/expenses/expenses.repository.js';
 import { Expense } from '../src/expenses/entity/expense.entity.js';
+import { HttpException } from '../src/helpers/Exception.js';
 
 describe('ExpensesController', () => {
+  const mockExpense: Readonly<Expense> = {
+    id: 1,
+    name: 'Test Expense',
+    amount: 100,
+    currency: 'USD',
+    category: 'Test',
+    date: new Date('2025-09-26T10:00:00.000Z'),
+  };
   let controller: ExpensesController;
   let expensesService: ExpensesService;
 
@@ -27,18 +36,40 @@ describe('ExpensesController', () => {
     jest.restoreAllMocks();
   });
 
+  describe('find', () => {
+    it('should return an expense and a 200 status code', async () => {
+      const findSpy = jest
+        .spyOn(expensesService, 'find')
+        .mockResolvedValue(mockExpense);
+
+      const req = getMockReq({ params: { id: '1' } });
+      const { res } = getMockRes();
+
+      // @ts-expect-error - private method access for testing
+      await controller.find(req, res);
+
+      expect(findSpy).toHaveBeenCalledWith(1);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(mockExpense);
+    });
+
+    it('should call the next function with an error if expense is not found', async () => {
+      const notFoundError = new HttpException(404, 'Expense not found');
+      jest.spyOn(expensesService, 'find').mockRejectedValue(notFoundError);
+
+      const req = getMockReq({ params: { id: '-1' } });
+      const { res, next } = getMockRes();
+
+      // @ts-expect-error - private method access for testing
+      await controller.find(req, res, next);
+
+      expect(next).toHaveBeenCalledWith(notFoundError);
+    });
+  });
+
   describe('findAll', () => {
     it('should return a list of expenses and a 200 status code', async () => {
-      const mockExpenses: Expense[] = [
-        {
-          id: 1,
-          name: 'Test Expense',
-          amount: 100,
-          currency: 'USD',
-          category: 'Test',
-          date: new Date(),
-        },
-      ];
+      const mockExpenses: Expense[] = [mockExpense];
 
       const findAllSpy = jest
         .spyOn(expensesService, 'findAll')
@@ -56,16 +87,7 @@ describe('ExpensesController', () => {
     });
 
     it('should pass query parameters to the service layer', async () => {
-      const mockExpenses: Expense[] = [
-        {
-          id: 1,
-          name: 'Test Expense',
-          amount: 100,
-          currency: 'USD',
-          category: 'Test',
-          date: new Date(),
-        },
-      ];
+      const mockExpenses: Expense[] = [mockExpense];
 
       const findAllSpy = jest
         .spyOn(expensesService, 'findAll')
@@ -74,8 +96,8 @@ describe('ExpensesController', () => {
       const query = {
         limit: '10',
         offset: '0',
-        fromDate: '2024-01-01',
-        toDate: '2024-12-31',
+        fromDate: '2025-01-01',
+        toDate: '2025-12-31',
       };
 
       const req = getMockReq({ query });
@@ -87,8 +109,8 @@ describe('ExpensesController', () => {
       expect(findAllSpy).toHaveBeenCalledWith({
         limit: 10,
         offset: 0,
-        fromDate: '2024-01-01',
-        toDate: '2024-12-31',
+        fromDate: '2025-01-01',
+        toDate: '2025-12-31',
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(mockExpenses);
