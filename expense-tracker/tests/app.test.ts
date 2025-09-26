@@ -54,44 +54,5 @@ describe('ExpensesController', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(mockExpenses);
     });
-
-    it('should pass query parameters to the service layer', async () => {
-      const mockExpenses: Expense[] = [
-        {
-          id: 1,
-          name: 'Test Expense',
-          amount: 100,
-          currency: 'USD',
-          category: 'Test',
-          date: new Date(),
-        },
-      ];
-
-      const findAllSpy = jest
-        .spyOn(expensesService, 'findAll')
-        .mockResolvedValue(mockExpenses);
-
-      const query = {
-        limit: '10',
-        offset: '0',
-        fromDate: '2024-01-01',
-        toDate: '2024-12-31',
-      };
-
-      const req = getMockReq({ query });
-      const { res } = getMockRes();
-
-      // @ts-expect-error - private method access for testing
-      await controller.findAll(req, res);
-
-      expect(findAllSpy).toHaveBeenCalledWith({
-        limit: 10,
-        offset: 0,
-        fromDate: '2024-01-01',
-        toDate: '2024-12-31',
-      });
-      expect(res.status).toHaveBeenCalledWith(200);
-      expect(res.json).toHaveBeenCalledWith(mockExpenses);
-    });
   });
 });

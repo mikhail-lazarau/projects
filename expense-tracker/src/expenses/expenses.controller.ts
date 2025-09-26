@@ -4,7 +4,6 @@ import {
   CreateExpenseDto,
   createExpenseSchema,
 } from './dto/create-expense.dto.js';
-import { GetExpensesDto } from './dto/get-expenses.dto.js';
 import { validationMiddleware } from '../helpers/middlewares/validator.js';
 
 export class ExpensesController {
@@ -32,13 +31,7 @@ export class ExpensesController {
   };
 
   private findAll = async (req: Request, res: Response) => {
-    const { limit, offset, fromDate, toDate } = req.query;
-    const expenses = await this.expensesService.findAll({
-      limit: limit ? Number(limit) : undefined,
-      offset: offset ? Number(offset) : undefined,
-      fromDate: fromDate as string,
-      toDate: toDate as string,
-    } as GetExpensesDto);
+    const expenses = await this.expensesService.findAll();
     res.status(200).json(expenses);
   };
 
