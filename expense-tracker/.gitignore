@@ -28,3 +28,4 @@ ehthumbs.db
 Thumbs.db
 
 prisma/*.sqlite
+../.windsurf/
