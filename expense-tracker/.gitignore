@@ -27,5 +27,4 @@ lerna-debug.log*
 ehthumbs.db
 Thumbs.db
 
-src/generated/prisma
-src/prisma/*.sqlite
+prisma/*.sqlite

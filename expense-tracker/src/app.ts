@@ -3,6 +3,7 @@ import config from './config/index.js';
 import { ExpensesController } from './expenses/expenses.controller.js';
 import { ExpensesService } from './expenses/expenses.service.js';
 import { ExpensesRepository } from './expenses/expenses.repository.js';
+import { errorHandler } from './helpers/middlewares/errorHandler.js';
 
 const app = express();
 
@@ -17,6 +18,12 @@ app.use('/api/expenses', expensesController.router);
 app.get('/api/ping', (req: Request, res: Response) => {
   res.json({ message: 'pong' });
 });
+
+app.use((req, res) => {
+  res.status(404).json({ message: 'Not Found' });
+});
+
+app.use(errorHandler);
 
 export const start = () => {
   app.listen(config.port, () => {
