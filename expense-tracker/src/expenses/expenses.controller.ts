@@ -4,6 +4,10 @@ import {
   CreateExpenseDto,
   createExpenseSchema,
 } from './dto/create-expense.dto.js';
+import {
+  UpdateExpenseDto,
+  updateExpenseSchema,
+} from './dto/update-expense.dto.js';
 import { GetExpensesDto } from './dto/get-expenses.dto.js';
 import { validationMiddleware } from '../helpers/middlewares/validator.js';
 
@@ -22,6 +26,11 @@ export class ExpensesController {
     );
     this.router.get('/', this.findAll);
     this.router.get('/:id', this.find);
+    this.router.patch(
+      '/:id',
+      validationMiddleware(updateExpenseSchema),
+      this.update,
+    );
   };
 
   private create = async (req: Request, res: Response) => {
@@ -45,6 +54,18 @@ export class ExpensesController {
   private find = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const expense = await this.expensesService.find(Number(req.params.id));
+      res.status(200).json(expense);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  private update = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const expense = await this.expensesService.update(
+        Number(req.params.id),
+        req.body as UpdateExpenseDto,
+      );
       res.status(200).json(expense);
     } catch (error) {
       next(error);

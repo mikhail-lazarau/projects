@@ -24,9 +24,10 @@ describe('ExpensesController', () => {
   };
   let controller: ExpensesController;
   let expensesService: ExpensesService;
+  let mockRepository: jest.Mocked<ExpensesRepository>;
 
   beforeEach(() => {
-    const mockRepository =
+    mockRepository =
       new ExpensesRepository() as jest.Mocked<ExpensesRepository>;
     expensesService = new ExpensesService(mockRepository);
     controller = new ExpensesController(expensesService);
@@ -114,6 +115,51 @@ describe('ExpensesController', () => {
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(mockExpenses);
+    });
+  });
+
+  describe('update', () => {
+    it('should return the updated expense and a 200 status code', async () => {
+      const updatedExpense: Expense = {
+        ...mockExpense,
+        name: 'Updated Expense',
+      };
+
+      const updateSpy = jest
+        .spyOn(mockRepository, 'update')
+        .mockResolvedValue(updatedExpense);
+
+      const req = getMockReq({
+        params: { id: '1' },
+        body: { name: 'Updated Expense' },
+      });
+      const { res, next } = getMockRes();
+
+      // @ts-expect-error - private method access for testing
+      await controller.update(req, res, next);
+
+      expect(updateSpy).toHaveBeenCalledWith(1, { name: 'Updated Expense' });
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(updatedExpense);
+    });
+
+    it('should call the next function with an error if expense is not found', async () => {
+      const notFoundError = new HttpException(404, 'Expense not found');
+      const findSpy = jest
+        .spyOn(mockRepository, 'find')
+        .mockResolvedValue(null);
+
+      const req = getMockReq({
+        params: { id: '-1' },
+        body: { name: 'Updated Expense' },
+      });
+      const { res, next } = getMockRes();
+
+      // @ts-expect-error - private method access for testing
+      await controller.update(req, res, next);
+
+      expect(findSpy).toHaveBeenCalledWith(-1);
+      expect(next).toHaveBeenCalledWith(notFoundError);
     });
   });
 });
