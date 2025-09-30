@@ -1,6 +1,7 @@
 import { ExpensesRepository } from './expenses.repository.js';
 import { CreateExpenseDto } from './dto/create-expense.dto.js';
 import { GetExpensesDto } from './dto/get-expenses.dto.js';
+import { UpdateExpenseDto } from './dto/update-expense.dto.js';
 import { HttpException } from '../helpers/Exception.js';
 
 export class ExpensesService {
@@ -21,4 +22,12 @@ export class ExpensesService {
     }
     return expense;
   }
+
+  public update = async (id: number, dto: UpdateExpenseDto) => {
+    const expense = await this.expensesRepository.find(id);
+    if (!expense) {
+      throw new HttpException(404, 'Expense not found');
+    }
+    return this.expensesRepository.update(id, dto);
+  };
 }

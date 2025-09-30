@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { CreateExpenseDto } from './dto/create-expense.dto.js';
 import { GetExpensesDto } from './dto/get-expenses.dto.js';
+import { UpdateExpenseDto } from './dto/update-expense.dto.js';
 
 const prisma = new PrismaClient();
 
@@ -35,5 +36,12 @@ export class ExpensesRepository {
 
   public find = async (id: number) => {
     return prisma.expense.findUnique({ where: { id } });
+  };
+
+  public update = async (id: number, dto: UpdateExpenseDto) => {
+    return prisma.expense.update({
+      where: { id },
+      data: dto,
+    });
   };
 }
