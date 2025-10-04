@@ -6,7 +6,7 @@
   "main": "build/index.js",
   "scripts": {
     "start": "node build/index.js",
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch --inspect src/index.ts",
     "build": "tsc",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "migrate": "npx prisma migrate dev",

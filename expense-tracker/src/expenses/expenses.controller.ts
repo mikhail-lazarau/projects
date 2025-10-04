@@ -75,8 +75,8 @@ export class ExpensesController {
 
   private delete = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      await this.expensesService.delete(Number(req.params.id));
-      res.status(204).send();
+      const expense = await this.expensesService.delete(Number(req.params.id));
+      res.status(204).send(expense);
     } catch (error) {
       next(error);
     }
