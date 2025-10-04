@@ -31,6 +31,7 @@ export class ExpensesController {
       validationMiddleware(updateExpenseSchema),
       this.update,
     );
+    this.router.delete('/:id', this.delete);
   };
 
   private create = async (req: Request, res: Response) => {
@@ -67,6 +68,15 @@ export class ExpensesController {
         req.body as UpdateExpenseDto,
       );
       res.status(200).json(expense);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  private delete = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await this.expensesService.delete(Number(req.params.id));
+      res.status(204).send();
     } catch (error) {
       next(error);
     }
