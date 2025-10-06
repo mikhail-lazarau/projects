@@ -18,8 +18,6 @@ app.use('/api/expenses', expensesController.router);
 
 app.get('/api/ping', (req: Request, res: Response) => {
   res.json({ message: 'pong' });
-
-  
 });
 
 app.use((req, res) => {
