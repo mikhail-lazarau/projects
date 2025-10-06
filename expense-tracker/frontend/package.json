@@ -11,8 +11,7 @@
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "stylelint": "stylelint '**/*.css'",
     "stylelint:fix": "stylelint '**/*.css' --fix",
-    "format": "prettier --write .",
-    "prepare": "node ../scripts/set-hooks-path.js frontend"
+    "format": "prettier --write ."
   },
   "dependencies": {
     "react": "^18.2.0",

@@ -1,0 +1,29 @@
+{
+  "name": "expense-tracker-root",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "prepare": "husky && chmod +x .husky/pre-commit"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.3"
+  },
+  "lint-staged": {
+    "frontend/**/*.{ts,tsx}": [
+      "eslint --fix"
+    ],
+    "frontend/**/*.css": [
+      "stylelint --fix"
+    ],
+    "backend/**/*.ts": [
+      "eslint --fix"
+    ],
+    "**/*.{js,jsx,ts,tsx,json,css,md}": [
+      "prettier --write"
+    ]
+  }
+}

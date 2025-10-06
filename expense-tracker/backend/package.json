@@ -12,8 +12,7 @@
     "migrate": "npx prisma migrate dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "prepare": "node ../scripts/set-hooks-path.js backend"
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
