@@ -13,7 +13,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "prepare": "npx node scripts/set-hooks-path.js"
+    "prepare": "node ../scripts/set-hooks-path.js backend"
   },
   "keywords": [],
   "author": "",
