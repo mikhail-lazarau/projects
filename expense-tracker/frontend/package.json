@@ -12,15 +12,13 @@
     "stylelint": "stylelint '**/*.css'",
     "stylelint:fix": "stylelint '**/*.css' --fix",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "npx node scripts/set-hooks-path.js"
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "typescript-eslint": "^8.45.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.4.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
@@ -32,6 +30,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
+    "typescript-eslint": "^8.45.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.3",
     "prettier": "^3.2.5",
