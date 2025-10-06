@@ -1,4 +1,2 @@
 cd "$(git rev-parse --show-toplevel)/expense-tracker/frontend"
-# chmod +x .husky/pre-commit
-git update-index --chmod=+x .husky/pre-commit
 npx lint-staged
