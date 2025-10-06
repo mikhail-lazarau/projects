@@ -22,6 +22,11 @@ try {
   execSync(`git config core.hooksPath "${hooks}"`, { stdio: 'inherit' });
 
   console.log('✔ hooksPath set to:', hooks);
+
+  // Make pre-commit hook executable
+  const preCommitHookPath = path.join(hooks, 'pre-commit');
+  execSync(`chmod +x "${preCommitHookPath}"`, { stdio: 'inherit' });
+  console.log('✔ pre-commit hook is executable');
 } catch (err) {
   const message = err instanceof Error ? err.message : String(err);
   console.error('⚠ Failed to set core.hooksPath:', message);
