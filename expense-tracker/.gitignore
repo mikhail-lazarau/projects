@@ -1,3 +1,6 @@
+# Project Root
+/node_modules/
+
 # General
 .DS_Store
 
