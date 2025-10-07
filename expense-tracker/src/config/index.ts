@@ -19,6 +19,7 @@ const normalizePort = (val: string) => {
 const config = {
   port: normalizePort(process.env.PORT || '8080'),
   databaseUrl: process.env.DATABASE_URL || '',
+  NODE_ENV: process.env.NODE_ENV || 'development',
 };
 
 export default config;

@@ -12,6 +12,8 @@ import { ExpensesService } from '../src/expenses/expenses.service.js';
 import { ExpensesRepository } from '../src/expenses/expenses.repository.js';
 import { Expense } from '../src/expenses/entity/expense.entity.js';
 import { HttpException } from '../src/helpers/Exception.js';
+import logger from '../src/helpers/Logger.js';
+import { errorHandler } from '../src/helpers/middlewares/errorHandler.js';
 
 describe('ExpensesController', () => {
   const mockExpense: Readonly<Expense> = {
@@ -167,9 +169,9 @@ describe('ExpensesController', () => {
     it('should return a 204 status code on successful deletion', async () => {
       const deleteSpy = jest
         .spyOn(expensesService, 'delete')
-        .mockResolvedValue(undefined as unknown as Expense);
+        .mockResolvedValue(mockExpense);
 
-      const req = getMockReq({ params: { id: '1' } });
+      const req = getMockReq({ params: { id: mockExpense.id.toString() } });
       const { res, next } = getMockRes();
 
       // @ts-expect-error - private method access for testing
@@ -191,6 +193,25 @@ describe('ExpensesController', () => {
       await controller.delete(req, res, next);
 
       expect(next).toHaveBeenCalledWith(notFoundError);
+    });
+  });
+});
+
+describe('errorHandler', () => {
+  it('should log the error and send a JSON response', () => {
+    const error = new HttpException(404, 'Not Found');
+    const loggerSpy = jest.spyOn(logger, 'error');
+    const req = getMockReq();
+    const { res, next } = getMockRes();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    errorHandler(error, req as any, res as any, next);
+
+    expect(loggerSpy).toHaveBeenCalledWith(error);
+    expect(res.status).toHaveBeenCalledWith(404);
+    expect(res.json).toHaveBeenCalledWith({
+      status: 404,
+      message: 'Not Found',
     });
   });
 });
