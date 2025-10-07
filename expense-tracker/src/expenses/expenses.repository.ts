@@ -44,4 +44,8 @@ export class ExpensesRepository {
       data: dto,
     });
   };
+
+  public delete = async (id: number) => {
+    return prisma.expense.delete({ where: { id } });
+  };
 }

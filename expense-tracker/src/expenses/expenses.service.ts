@@ -30,4 +30,12 @@ export class ExpensesService {
     }
     return this.expensesRepository.update(id, dto);
   };
+
+  public delete = async (id: number) => {
+    const expense = await this.expensesRepository.find(id);
+    if (!expense) {
+      throw new HttpException(404, 'Expense not found');
+    }
+    return this.expensesRepository.delete(id);
+  };
 }

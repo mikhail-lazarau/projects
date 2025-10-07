@@ -162,4 +162,35 @@ describe('ExpensesController', () => {
       expect(next).toHaveBeenCalledWith(notFoundError);
     });
   });
+
+  describe('delete', () => {
+    it('should return a 204 status code on successful deletion', async () => {
+      const deleteSpy = jest
+        .spyOn(expensesService, 'delete')
+        .mockResolvedValue(undefined as unknown as Expense);
+
+      const req = getMockReq({ params: { id: '1' } });
+      const { res, next } = getMockRes();
+
+      // @ts-expect-error - private method access for testing
+      await controller.delete(req, res, next);
+
+      expect(deleteSpy).toHaveBeenCalledWith(1);
+      expect(res.status).toHaveBeenCalledWith(204);
+      expect(res.send).toHaveBeenCalled();
+    });
+
+    it('should call the next function with an error if expense is not found', async () => {
+      const notFoundError = new HttpException(404, 'Expense not found');
+      jest.spyOn(expensesService, 'delete').mockRejectedValue(notFoundError);
+
+      const req = getMockReq({ params: { id: '-1' } });
+      const { res, next } = getMockRes();
+
+      // @ts-expect-error - private method access for testing
+      await controller.delete(req, res, next);
+
+      expect(next).toHaveBeenCalledWith(notFoundError);
+    });
+  });
 });
