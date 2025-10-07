@@ -11,6 +11,7 @@ app.use(express.json());
 
 const expensesRepository = new ExpensesRepository();
 const expensesService = new ExpensesService(expensesRepository);
+
 const expensesController = new ExpensesController(expensesService);
 
 app.use('/api/expenses', expensesController.router);

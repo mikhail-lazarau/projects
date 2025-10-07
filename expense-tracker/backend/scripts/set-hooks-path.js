@@ -13,7 +13,7 @@ try {
   const root = run('git rev-parse --show-toplevel');
 
   // Absolute path to the Husky folder
-  const hooks = path.join(root, 'expense-tracker', '.husky');
+  const hooks = path.join(root, 'expense-tracker', 'backend', '.husky');
 
   // Ensure Husky is installed into that folder (no .git needed here)
   execSync(`npx husky "${hooks}"`, { stdio: 'inherit' });
