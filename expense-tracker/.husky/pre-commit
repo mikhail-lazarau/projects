@@ -1,2 +1,1 @@
-echo "HUSKY PRE-COMMIT HOOK IS RUNNING"
-npx lint-staged
+npm test
