@@ -1,10 +1,8 @@
 import styles from './Loader.module.css';
 
-/**
- * A simple loader component that displays a spinning SVG icon.
- * It is used to indicate a loading state to the user.
- */
 export const Loader = () => (
+
+    
   <div className={styles.loaderContainer} data-testid="loader">
     <svg
       className={styles.loader}

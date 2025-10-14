@@ -14,13 +14,13 @@
   },
   "lint-staged": {
     "frontend/**/*.{ts,tsx}": [
-      "eslint --fix"
+      "npm --prefix frontend run lint:fix"
     ],
     "frontend/**/*.css": [
-      "stylelint --fix"
+      "npm --prefix frontend run stylelint:fix"
     ],
     "backend/**/*.ts": [
-      "eslint --fix"
+      "npm --prefix backend run lint:fix"
     ],
     "**/*.{js,jsx,ts,tsx,json,css,md}": [
       "prettier --write"
