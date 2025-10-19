@@ -45,4 +45,16 @@ describe('InputLabel', () => {
     fireEvent.change(input, { target: { value: 'test' } });
     expect(handleChange).toHaveBeenCalledTimes(1);
   });
+
+  it('spreads additional props to the input element', () => {
+    render(<InputLabel label="Email" data-testid="custom-input" />);
+    expect(screen.getByTestId('custom-input')).toBeInTheDocument();
+  });
+
+  it('applies a custom container class name', () => {
+    const { container } = render(
+      <InputLabel label="Email" containerClassName="my-custom-class" />
+    );
+    expect(container.firstChild).toHaveClass('my-custom-class');
+  });
 });

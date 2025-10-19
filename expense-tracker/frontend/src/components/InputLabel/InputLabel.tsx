@@ -18,7 +18,8 @@ export const InputLabel: React.FC<InputLabelProps> = ({
 }) => {
   const id = useId();
   const [isFocused, setIsFocused] = useState(false);
-  const [hasValue, setHasValue] = useState(!!value || !!defaultValue);
+  const [internalValue, setInternalValue] = useState(defaultValue || value || '');
+  const hasValue = internalValue !== '';
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     setIsFocused(true);
@@ -31,7 +32,7 @@ export const InputLabel: React.FC<InputLabelProps> = ({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setHasValue(!!e.target.value);
+    setInternalValue(e.target.value);
     onChange?.(e);
   };
 
@@ -56,8 +57,7 @@ export const InputLabel: React.FC<InputLabelProps> = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange}
-        value={value}
-        defaultValue={defaultValue}
+        value={internalValue}
         {...props}
       />
     </div>

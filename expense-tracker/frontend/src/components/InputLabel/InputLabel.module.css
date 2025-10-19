@@ -1,6 +1,5 @@
 .container {
   position: relative;
-  width: 327px;
   height: 68px;
 }
 
@@ -38,18 +37,10 @@
 }
 
 /* Active state for floating label */
-.container.active .label,
-.input:focus + .label {
+.container.active .label {
   top: 0;
   font-size: 12px;
   color: #3629B7;
-}
-
-/* When input has focus, apply active styles to the label */
-.container.active .label {
-    top: 0;
-    font-size: 12px;
-    color: #3629B7;
 }
 
 /* When container is active (input has value or focus) */

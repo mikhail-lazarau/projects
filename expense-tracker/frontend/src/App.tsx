@@ -1,4 +1,5 @@
 import { Button } from './components/Button';
+import { InputLabel } from './components/InputLabel';
 import Logo from './components/Logo';
 
 function App() {
@@ -10,6 +11,10 @@ function App() {
         <Button variant="secondary">Click me</Button>
         <Button disabled>Click me</Button>
         <Button loading>Click me</Button>
+      </div>
+      <div style={{ margin: '20px', display: 'flex', flexDirection: 'column', gap: '30px', width: '327px' }}>
+        <InputLabel label="Email" type='email' />
+        <InputLabel label="Password" type="password" defaultValue="some value" />
       </div>
       <h1>Vite + React</h1>
     </>
