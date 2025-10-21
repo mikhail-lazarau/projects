@@ -1,8 +1,24 @@
+import { useMemo } from 'react';
 import { Button } from './components/Button';
-import { InputLabel } from './components/InputLabel';
+import { Input } from './components/Input';
 import Logo from './components/Logo';
 
 function App() {
+  const emailLabel = useMemo(
+    () => ({
+      floating: 'Email',
+      placeholder: 'Enter your email',
+    }),
+    []
+  );
+
+  const passwordLabel = useMemo(
+    () => ({
+      floating: 'Password',
+      placeholder: 'Enter your password',
+    }),
+    []
+  );
   return (
     <>
       <Logo />
@@ -13,14 +29,9 @@ function App() {
         <Button loading>Click me</Button>
       </div>
       <div style={{ margin: '20px', display: 'flex', flexDirection: 'column', gap: '30px', width: '327px' }}>
-        <InputLabel
-          floatingLabel="Email"
-          placeholderLabel="Enter your email"
-          type="email"
-        />
-        <InputLabel
-          floatingLabel="Password"
-          placeholderLabel="Enter your password"
+        <Input label={emailLabel} type="email" />
+        <Input
+          label={passwordLabel}
           type="password"
           defaultValue="some value"
         />

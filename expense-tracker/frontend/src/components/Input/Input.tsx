@@ -1,15 +1,16 @@
 import React, { useState, useId } from 'react';
-import styles from './InputLabel.module.css';
+import styles from './Input.module.css';
 
 export interface InputLabelProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'id'> {
-  floatingLabel: string;
-  placeholderLabel: string;
+  label: {
+    floating: string;
+    placeholder: string;
+  };
   containerClassName?: string;
 }
 
-export const InputLabel: React.FC<InputLabelProps> = ({
-  floatingLabel,
-  placeholderLabel,
+const InputLabelComponent: React.FC<InputLabelProps> = ({
+  label,
   containerClassName,
   onFocus,
   onBlur,
@@ -51,7 +52,7 @@ export const InputLabel: React.FC<InputLabelProps> = ({
   return (
     <div className={containerClasses}>
       <label htmlFor={id} className={styles.label}>
-        {isLabelFloating ? floatingLabel : placeholderLabel}
+        {isLabelFloating ? label.floating : label.placeholder}
       </label>
       <input
         id={id}
@@ -65,3 +66,5 @@ export const InputLabel: React.FC<InputLabelProps> = ({
     </div>
   );
 };
+
+export const Input = React.memo(InputLabelComponent);
