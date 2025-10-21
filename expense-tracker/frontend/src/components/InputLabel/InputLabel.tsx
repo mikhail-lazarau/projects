@@ -2,12 +2,14 @@ import React, { useState, useId } from 'react';
 import styles from './InputLabel.module.css';
 
 export interface InputLabelProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'id'> {
-  label: string;
+  floatingLabel: string;
+  placeholderLabel: string;
   containerClassName?: string;
 }
 
 export const InputLabel: React.FC<InputLabelProps> = ({
-  label,
+  floatingLabel,
+  placeholderLabel,
   containerClassName,
   onFocus,
   onBlur,
@@ -49,7 +51,7 @@ export const InputLabel: React.FC<InputLabelProps> = ({
   return (
     <div className={containerClasses}>
       <label htmlFor={id} className={styles.label}>
-        {label}
+        {isLabelFloating ? floatingLabel : placeholderLabel}
       </label>
       <input
         id={id}

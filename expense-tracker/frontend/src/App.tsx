@@ -13,8 +13,17 @@ function App() {
         <Button loading>Click me</Button>
       </div>
       <div style={{ margin: '20px', display: 'flex', flexDirection: 'column', gap: '30px', width: '327px' }}>
-        <InputLabel label="Email" type='email' />
-        <InputLabel label="Password" type="password" defaultValue="some value" />
+        <InputLabel
+          floatingLabel="Email"
+          placeholderLabel="Enter your email"
+          type="email"
+        />
+        <InputLabel
+          floatingLabel="Password"
+          placeholderLabel="Enter your password"
+          type="password"
+          defaultValue="some value"
+        />
       </div>
       <h1>Vite + React</h1>
     </>

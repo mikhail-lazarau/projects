@@ -27,7 +27,7 @@
   position: absolute;
   left: 16px;
   top: 36px; /* Vertically centered in the 44px input area */
-  transform: translateY(-50%);
+  transform: translateY(0%);
   color: #979797;
   font-size: 16px;
   pointer-events: none;
