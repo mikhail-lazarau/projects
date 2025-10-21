@@ -23,7 +23,7 @@ function App() {
   return (
     <>
       <Logo />
-      <div style={{ margin: '20px', display: 'flex', gap: '15px', alignItems: 'center', justifyContent: 'flex-start' }}>
+      <div style={{ margin: '20px', display: 'flex', gap: '15px', alignItems: 'center', justifyContent: 'left' }}>
         <Icon iconName="plus" size={{ width: 15, height: 15 }} color="#3629B7" />
         <Icon iconName="bell" />
         <Icon iconName="empty-square" size={{ width: 30, height: 30 }} />
