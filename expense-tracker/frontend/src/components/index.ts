@@ -1,2 +1,3 @@
-export * from './Logo';
 export * from './Loader';
+export * from './Logo';
+export * from './Icon';
