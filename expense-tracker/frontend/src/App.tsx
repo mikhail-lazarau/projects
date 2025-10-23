@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Button } from './components/Button';
 import { Input } from './components/Input';
+import { DatePicker } from './components/DatePicker';
 import { Icon } from './components/Icon';
 import Logo from './components/Logo';
 
@@ -20,6 +21,8 @@ function App() {
     }),
     []
   );
+
+  const [date, setDate] = useState(new Date());
   return (
     <>
       <Logo />
@@ -42,6 +45,7 @@ function App() {
           type="password"
           defaultValue="some value"
         />
+        <DatePicker placeholder="Select a date" value={date} onChange={setDate} />
       </div>
       <h1>Vite + React</h1>
     </>

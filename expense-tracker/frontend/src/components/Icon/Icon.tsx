@@ -7,6 +7,7 @@ const iconMap = {
   'tick-square': lazy(() => import('../../assets/icons/tick-square.svg?react')),
   bell: lazy(() => import('../../assets/icons/bell.svg?react')),
   plus: lazy(() => import('../../assets/icons/plus.svg?react')),
+  calendar: lazy(() => import('../../assets/icons/calendar.svg?react')),
 };
 
 export type IconName = keyof typeof iconMap;
